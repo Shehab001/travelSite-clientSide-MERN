@@ -6,6 +6,7 @@ import Footer from "../components/footer/Footer";
 import Home from "../components/home/Home";
 import LogIn from "../components/login/LogIn";
 import SignIn from "../components/signin/SignIn";
+import SingleService from "../components/singleService/SingleService";
 import Main from "../layout/Main";
 
 const router = createBrowserRouter([
@@ -51,12 +52,12 @@ const router = createBrowserRouter([
       //       </PrivateRoute>
       //     ),
       //   },
-      //   {
-      //     path: "/category/:id",
-      //     element: <Card></Card>,
-      //     loader: ({ params }) =>
-      //       fetch(`https://brins-server.vercel.app/category/${params.id}`),
-      //   },
+      {
+        path: "/singleservice/:id",
+        element: <SingleService></SingleService>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/singleservice/${params.id}`),
+      },
       {
         path: "*",
         element: <h1 className="text-6xl text-center m-20">404 Not Found</h1>,

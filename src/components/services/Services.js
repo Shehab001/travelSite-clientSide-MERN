@@ -40,7 +40,7 @@ const Services = () => {
               </p>
               <div className="card-actions justify-end">
                 <div className="badge badge-outline cursor-pointer p-5">
-                  View Details
+                  <Link to={`/singleservice/${service._id}`}>View Details</Link>
                 </div>
               </div>
             </div>
