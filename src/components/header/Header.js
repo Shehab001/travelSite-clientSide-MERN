@@ -26,7 +26,7 @@ const Header = () => {
             <span className="font-bold  italic text-red-900">Travo</span>
           </a>
         </div>
-        <div className="flex-none">
+        <div className="flex-none font-bold">
           {user?.uid ? (
             <>
               <div>
