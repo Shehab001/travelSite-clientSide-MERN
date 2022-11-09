@@ -27,22 +27,48 @@ const SignIn = () => {
 
     const form = event.target;
 
-    const nam = form.nam.value;
     const name = form.email.value;
     const pass = form.password.value;
     const url = form.url.value;
-    //console.log(name, pass, nam, url);
+    //console.log(name, pass, url);
 
     if (pass.length < 6) {
       setError("Password should be 6 characters or more.");
       return;
     }
+
+    createUser(name, pass)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+        setSuccess(true);
+        form.reset();
+        setError("");
+        // navigate(from, { replace: true });
+        handleUpdateUserProfile(url);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+        // ..
+      });
+    const handleUpdateUserProfile = (url) => {
+      const profile = {
+        photoURL: url,
+      };
+      console.log(profile);
+      updateUserProfile(profile)
+        .then(() => {})
+        .catch((error) => console.error(error));
+    };
   };
 
   return (
     <div className="form">
       <h1 className="text-4xl m-10 text-white underline">Sign Up Form</h1>
-      onSubmit={handleForm}
+      {/* onSubmit={handleForm} */}
       <form onSubmit={handleForm}>
         <div className="mb-6">
           <label
@@ -111,7 +137,7 @@ const SignIn = () => {
         </div>
         <p className="text-red-800 font-semibold">{error}</p>
         {success && <p className="text-red-800">User Created Successfully</p>}
-        <p>{error}</p>
+        {/* <p>{error}</p> */}
         <p className=" text-white mb-5">
           <small className="mr-5">Already Have an account?</small>
           <Link to="/login"> Log In</Link>

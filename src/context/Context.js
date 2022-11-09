@@ -32,9 +32,9 @@ const Context = ({ children }) => {
   //   return signInWithEmailAndPassword(auth, email, password);
   // };
 
-  // const updateUserProfile = (profile) => {
-  //   return updateProfile(auth.currentUser, profile);
-  // };
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
+  };
 
   // const logOut = () => {
   //   setLoading(true);
@@ -59,8 +59,8 @@ const Context = ({ children }) => {
     // logOut,
     createUser,
     // signIn,
-    // updateUserProfile,
-    // loading,
+    updateUserProfile,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
