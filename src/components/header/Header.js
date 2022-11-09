@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/Context";
 import "./Header.css";
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
+  const handleBtn = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div>
       <div className="navbar bg mt-3">
@@ -17,43 +27,63 @@ const Header = () => {
           </a>
         </div>
         <div className="flex-none">
-          <div>
-            <p className="border p-2 mr-3 cursor-pointer border-red-900">
-              Add Services
-            </p>
-          </div>
+          {user?.uid ? (
+            <>
+              <div>
+                <p className="border p-2 mr-3 cursor-pointer border-red-900">
+                  Add Services
+                </p>
+              </div>
+              <div>
+                <p className="border p-2  mr-3 cursor-pointer border-red-900">
+                  My Review
+                </p>
+              </div>
+            </>
+          ) : (
+            <p></p>
+          )}
+
           <div>
             <p className="border p-2  mr-3 cursor-pointer border-red-900">
-              My Review
+              Review
             </p>
           </div>
+
           <div>
             <p className="border p-2 mr-3 cursor-pointer border-red-900">
-              <Link to="/blogs">Blog</Link>
+              <Link to="/blogs">Blogs</Link>
             </p>
           </div>
           <div
             className="dropdown dropdown-end tooltip  tooltip-bottom"
-            data-tip="Log Out"
+            data-tip="Click to open"
           >
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full  ">
-                <img src="https://placeimg.com/80/80/people" />
+                <img src={user?.photoURL} />
               </div>
             </label>
             <ul
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a className="justify-between">Log In</a>
-              </li>
-              <li>
-                <a>Sign In</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
+              {user?.uid ? (
+                <li onClick={handleBtn}>
+                  <a>Log Out</a>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login" className="justify-between">
+                      Log In
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/signin">Sign Up</Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
