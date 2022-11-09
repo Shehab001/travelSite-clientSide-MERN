@@ -8,10 +8,11 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import app from "../../firebase/Firebase";
-import { AuthContext } from "../../Context/Context";
+import { AuthContext } from "../../context/Context";
 
 const SignIn = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, user } = useContext(AuthContext);
+  //console.log(user);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   // const navigate = useNavigate();
@@ -55,7 +56,7 @@ const SignIn = () => {
             id="email"
             name="email"
             className="bg-black border w-80 border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="name@......com"
+            placeholder="Email"
             required
           ></input>
         </div>
