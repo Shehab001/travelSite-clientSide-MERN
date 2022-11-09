@@ -4,6 +4,7 @@ import Footer from "../components/footer/Footer";
 
 import Home from "../components/home/Home";
 import LogIn from "../components/login/LogIn";
+import SignIn from "../components/signin/SignIn";
 import Main from "../layout/Main";
 
 const router = createBrowserRouter([
@@ -21,10 +22,10 @@ const router = createBrowserRouter([
         element: <LogIn></LogIn>,
       },
 
-      //   {
-      //     path: "/signup",
-      //     element: <Signup></Signup>,
-      //   },
+      {
+        path: "/signin",
+        element: <SignIn></SignIn>,
+      },
       //   {
       //     path: "/courses",
       //     element: <Courses></Courses>,
