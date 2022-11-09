@@ -3,13 +3,14 @@ import "./Header.css";
 const Header = () => {
   return (
     <div>
-      <div className="navbar bg">
+      <div className="navbar bg mt-3">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl w-24	">
             <img
               src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1667949925/Assignment%2011/beach-tour-logo-4505456896-seeklogo.com_hnehgp.png"
               alt="logo"
             ></img>
+            <span className="font-bold  italic text-red-900">Travo</span>
           </a>
         </div>
         <div className="flex-none">
