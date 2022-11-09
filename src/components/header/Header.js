@@ -24,6 +24,11 @@ const Header = () => {
               My Review
             </p>
           </div>
+          <div>
+            <p className="border p-2 mr-3 cursor-pointer border-red-900">
+              Blogs
+            </p>
+          </div>
           <div
             className="dropdown dropdown-end tooltip  tooltip-bottom"
             data-tip="Log Out"
