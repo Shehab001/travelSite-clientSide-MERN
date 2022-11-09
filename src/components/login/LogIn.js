@@ -9,103 +9,75 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 //import "./Login.css";
-//import { AuthContext } from "../../Context/Context";
+import { AuthContext } from "../../context/Context";
 
 const LogIn = () => {
-  // const { signIn, providerLogin } = useContext(AuthContext);
-  // //console.log(user?.displayName);
+  const { signIn, providerLogin, loading } = useContext(AuthContext);
+  //console.log(user?.displayName);
 
-  // // // const [user, setUser] = useState({});
-  // const [error, setError] = useState("");
-  // const [success, setSuccess] = useState(false);
+  // // const [user, setUser] = useState({});
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   // const navigate = useNavigate();
   // const location = useLocation();
   // const from = location.state?.from?.pathname || "/";
 
-  // const googleProvider = new GoogleAuthProvider();
-  // const provider = new GithubAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
 
-  // //console.log(from);
+  //console.log(from);
 
-  // const handleBtn1 = () => {
-  //   providerLogin(provider)
-  //     .then((result) => {
-  //       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-  //       const credential = GithubAuthProvider.credentialFromResult(result);
-  //       const token = credential.accessToken;
+  const handleBtn = () => {
+    // signInWithPopup(googleProvider)
 
-  //       // The signed-in user info.
-  //       const user = result.user;
-  //       //console.log(user);
-  //       // setUser(user);
-  //       navigate(from, { replace: true });
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       // Handle Errors here.
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(errorMessage);
-  //       // The email of the user's account used.
-  //       const email = error.customData.email;
-  //       // The AuthCredential type that was used.
-  //       const credential = GithubAuthProvider.credentialFromError(error);
-  //       // ...
-  //     });
-  // };
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        // setUser(user);
+        //navigate(from, { replace: true });
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // const handleBtn = () => {
-  //   // signInWithPopup(googleProvider)
+  const handleForm = (event) => {
+    event.preventDefault();
 
-  //   providerLogin(googleProvider)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       // setUser(user);
-  //       navigate(from, { replace: true });
-  //       console.log(user);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+    setSuccess(false);
 
-  // const handleForm = (event) => {
-  //   event.preventDefault();
+    const form = event.target;
+    const name = form.email.value;
+    const pass = form.password.value;
+    //console.log(name, pass);
 
-  //   setSuccess(false);
+    signIn(name, pass)
+      .then((userCredential) => {
+        spinner();
+        // Signed in
+        const user = userCredential.user;
+        //console.log(loading);
+        // ...
+        setSuccess(true);
+        setError("");
+        //setUser(user);
+        // console.log(user);
+        // navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError("Invalid Credentials");
+      });
 
-  //   const form = event.target;
-  //   const name = form.email.value;
-  //   const pass = form.password.value;
-  //   //console.log(name, pass);
+    //console.log(name, pass);
 
-  //   signIn(name, pass)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       // console.log(user);
-  //       // ...
-  //       setSuccess(true);
-  //       setError("");
-  //       //setUser(user);
-  //       // console.log(user);
-  //       navigate(from, { replace: true });
-  //     })
-  //     .catch((error) => {
-  //       const errorMessage = error.message;
-  //       setError(errorMessage);
-  //     });
-
-  //   //console.log(name, pass);
-  // };
+    const spinner = () => {};
+  };
 
   return (
     <div className="form mt-20">
       <h1 className="text-4xl underline text-white m-10">Log In Form</h1>
-      <form
-        className="pb-20"
-        // onSubmit={handleForm}
-      >
+      <form className="pb-20" onSubmit={handleForm}>
         <div className="mb-6">
           <label
             htmlFor="email"
@@ -155,8 +127,8 @@ const LogIn = () => {
             Remember me
           </label>
         </div>
-        {/* {success && <p className="my-5 text-red-700">Logged In Successfully</p>}
-        <p className="my-5 text-red-700">{error}</p> */}
+        {success && <p className="my-5 text-red-700">Logged In Successfully</p>}
+        <p className="my-5 text-red-700">{error}</p>
 
         <p className="text-white my-5">
           <small className="mr-5">Don't have an account?</small>
@@ -170,16 +142,10 @@ const LogIn = () => {
         </button>
         <div className="flex justify-evenly pt-5">
           <span
-            // onClick={handleBtn}
+            onClick={handleBtn}
             className="text-white font-bold  cursor-pointer text-2xl"
           >
             Google
-          </span>
-          <span
-            // onClick={handleBtn1}
-            className="text-white font-bold  cursor-pointer text-2xl"
-          >
-            Github
           </span>
         </div>
       </form>

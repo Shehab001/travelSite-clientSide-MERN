@@ -1,13 +1,6 @@
 import React, { useContext, useState } from "react";
 //import "./Signup.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
-import app from "../../firebase/Firebase";
 import { AuthContext } from "../../context/Context";
 
 const SignIn = () => {
