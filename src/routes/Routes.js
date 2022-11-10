@@ -40,10 +40,10 @@ const router = createBrowserRouter([
         path: "/blogs",
         element: <Blog></Blog>,
       },
-      //   {
-      //     path: "/purchase",
-      //     element: <Success></Success>,
-      //   },
+      // {
+      //   path: "/addreview",
+      //   element: <Success></Success>,
+      // },
       //   {
       //     path: "/cart",
       //     element: (
