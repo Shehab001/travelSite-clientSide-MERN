@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/Context";
 import "./Header.css";
 const Header = () => {
-  const { user, logOut } = useContext(AuthContext);
-  console.log(user);
+  const { user, logOut, hide, setHide } = useContext(AuthContext);
+  console.log(user?.photoURL);
 
   const handleBtn = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        setHide(true);
+      })
       .catch((error) => console.error(error));
   };
 
@@ -36,7 +38,7 @@ const Header = () => {
               </div>
               <div>
                 <p className="border p-2  mr-3 cursor-pointer border-red-900">
-                  My Review
+                  <Link to="/myreview">My Review</Link>
                 </p>
               </div>
             </>
@@ -44,11 +46,11 @@ const Header = () => {
             <p></p>
           )}
 
-          <div>
+          {/* <div>
             <p className="border p-2  mr-3 cursor-pointer border-red-900">
               Review
             </p>
-          </div>
+          </div> */}
 
           <div>
             <p className="border p-2 mr-3 cursor-pointer border-red-900">
@@ -61,7 +63,18 @@ const Header = () => {
           >
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full  ">
-                <img src={user?.photoURL} />
+                {user?.uid ? (
+                  <img
+                    src={user?.photoURL}
+                    alt="user"
+                    referrerpolicy="no-referrer"
+                  ></img>
+                ) : (
+                  <img
+                    src="https://toppng.com/uploads/preview/app-icon-set-login-icon-comments-avatar-icon-11553436380yill0nchdm.png"
+                    alt="user"
+                  />
+                )}
               </div>
             </label>
             <ul

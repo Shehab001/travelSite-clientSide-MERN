@@ -4,20 +4,22 @@ import { AuthContext } from "../../context/Context";
 
 const SingleService = () => {
   const [reviews, setReviews] = useState([]);
-  const [hide, setHide] = useState(true);
-  const { user } = useContext(AuthContext);
-  //console.log(reviews);
+  // console.log(reviews);
+
+  const { user, hide, setHide } = useContext(AuthContext);
+
+  //console.log(user.email, user.photoURL);
   const service = useLoaderData();
   const id = service._id;
 
   // console.log(id);
-  //console.log(service._id);
+  //console.log(service.name);
 
   useEffect(() => {
     fetch(`http://localhost:5000/review/${service._id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, []);
+  }, [reviews]);
 
   const handleReview = (event) => {
     event.preventDefault();
@@ -26,11 +28,13 @@ const SingleService = () => {
     // console.log(review);
     //console.log(id);
     const info = {
+      title: service.name,
       id: id,
-      email: "useremail",
+      email: user.email,
       review: review,
+      img: service.img,
     };
-    console.log(info);
+    // console.log(info);
 
     fetch("http://localhost:5000/addreview", {
       method: "POST",

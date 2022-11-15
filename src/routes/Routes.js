@@ -5,6 +5,7 @@ import Footer from "../components/footer/Footer";
 
 import Home from "../components/home/Home";
 import LogIn from "../components/login/LogIn";
+import Myreview from "../components/myreview/Myreview";
 import SignIn from "../components/signin/SignIn";
 import SingleService from "../components/singleService/SingleService";
 import Main from "../layout/Main";
@@ -32,10 +33,10 @@ const router = createBrowserRouter([
         path: "/allservices",
         element: <AllServices></AllServices>,
       },
-      //   {
-      //     path: "/",
-      //     element: <Carosol></Carosol>,
-      //   },
+      {
+        path: "/myreview",
+        element: <Myreview></Myreview>,
+      },
       {
         path: "/blogs",
         element: <Blog></Blog>,
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
       //   path: "/addreview",
       //   element: <Success></Success>,
       // },
+
       //   {
       //     path: "/cart",
       //     element: (

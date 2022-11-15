@@ -90,7 +90,7 @@ const LogIn = () => {
             id="email"
             name="email"
             className="bg-black border border-gray-300 text-white text-sm rounded-lg w-80 focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="name@name.com"
+            placeholder="Email"
             required
           ></input>
         </div>
@@ -132,7 +132,7 @@ const LogIn = () => {
 
         <p className="text-white my-5">
           <small className="mr-5">Don't have an account?</small>
-          <Link to="/signup"> Sign Up</Link>
+          <Link to="/signin"> Sign Up</Link>
         </p>
         <button
           type="submit"
