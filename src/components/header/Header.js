@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/Context";
 import "./Header.css";
 const Header = () => {
   const { user, logOut, hide, setHide } = useContext(AuthContext);
-  console.log(user?.photoURL);
+  //console.log(user?.photoURL);
 
   const handleBtn = () => {
     logOut()
@@ -67,7 +67,7 @@ const Header = () => {
                   <img
                     src={user?.photoURL}
                     alt="user"
-                    referrerpolicy="no-referrer"
+                    referrerPolicy="no-referrer"
                   ></img>
                 ) : (
                   <img
