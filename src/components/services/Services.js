@@ -27,7 +27,7 @@ const Services = () => {
                 {service.name}
                 <div className="badge badge-secondary">TOP</div>
               </h2>
-              <p> {service.title}</p>
+              <p> {service.title.slice(0, 100)}</p>
 
               <p className="text-white font-semibold text-left">
                 Rating : {service.rating}

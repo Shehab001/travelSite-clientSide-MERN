@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Addservice from "../components/addservice/Addservice";
 import AllServices from "../components/allServices/AllServices";
 import Blog from "../components/blogs/Blog";
 import Footer from "../components/footer/Footer";
@@ -41,10 +42,10 @@ const router = createBrowserRouter([
         path: "/blogs",
         element: <Blog></Blog>,
       },
-      // {
-      //   path: "/addreview",
-      //   element: <Success></Success>,
-      // },
+      {
+        path: "/addservice",
+        element: <Addservice></Addservice>,
+      },
 
       //   {
       //     path: "/cart",

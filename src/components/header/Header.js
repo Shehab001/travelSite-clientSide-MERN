@@ -33,7 +33,7 @@ const Header = () => {
             <>
               <div>
                 <p className="border p-2 mr-3 cursor-pointer border-red-900">
-                  Add Services
+                  <Link to="/addservice">Add Service</Link>
                 </p>
               </div>
               <div>
