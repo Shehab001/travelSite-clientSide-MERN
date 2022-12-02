@@ -2,13 +2,16 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/Context";
 import "./Header.css";
+import { ToastContainer } from "react-toastify";
+
 const Header = () => {
-  const { user, logOut, hide, setHide } = useContext(AuthContext);
+  const { user, logOut, hide, setHide, notify } = useContext(AuthContext);
   //console.log(user?.photoURL);
 
   const handleBtn = () => {
     logOut()
       .then(() => {
+        notify("Successfully Logged Out");
         setHide(true);
       })
       .catch((error) => console.error(error));
@@ -16,6 +19,7 @@ const Header = () => {
 
   return (
     <div>
+      <ToastContainer />
       <div className="navbar bg mt-3">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl w-24	">

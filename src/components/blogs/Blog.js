@@ -1,6 +1,8 @@
 import React from "react";
+import useDocumentTitle from "../useDocumentTitle";
 
 const Blog = () => {
+  useDocumentTitle("Travo Blogs");
   return (
     <div className="w-9/12 mx-auto my-16 ">
       <h1 className="text-6xl italic underline text-center text-white">

@@ -5,8 +5,10 @@ import Blog from "../components/blogs/Blog";
 import Footer from "../components/footer/Footer";
 
 import Home from "../components/home/Home";
+import Loader from "../components/Loader";
 import LogIn from "../components/login/LogIn";
 import Myreview from "../components/myreview/Myreview";
+import Private from "../components/private/Private";
 import SignIn from "../components/signin/SignIn";
 import SingleService from "../components/singleService/SingleService";
 import Main from "../layout/Main";
@@ -35,8 +37,16 @@ const router = createBrowserRouter([
         element: <AllServices></AllServices>,
       },
       {
+        path: "/loading",
+        element: <Loader></Loader>,
+      },
+      {
         path: "/myreview",
-        element: <Myreview></Myreview>,
+        element: (
+          <Private>
+            <Myreview></Myreview>
+          </Private>
+        ),
       },
       {
         path: "/blogs",

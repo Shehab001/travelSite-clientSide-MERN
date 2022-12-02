@@ -1,21 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/Context";
-import EditReview from "../editReview/EditReview";
+import { ToastContainer } from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader";
+import useDocumentTitle from "../useDocumentTitle";
 
 const Myreview = () => {
   const [myreview, setMyreview] = useState([]);
   const [id, setId] = useState({});
   const [refresh, setRefresh] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, notify } = useContext(AuthContext);
+  const [spin, setSpin] = useState(true);
+  useDocumentTitle("Travo Review Page");
   // console.log(myreview.length);
   const xx = user?.email;
   // console.log(xx);
   useEffect(() => {
     fetch(`http://localhost:5000/myreview/${xx}`)
       .then((res) => res.json())
-      .then((data) => setMyreview(data));
-  }, [refresh]);
+      .then((data) => {
+        setMyreview(data);
+        setSpin(false);
+      });
+  }, [refresh, xx]);
 
   const handleForm = (event) => {
     event.preventDefault();
@@ -36,6 +43,7 @@ const Myreview = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           // alert(refresh);
+          notify("Review Modified.");
           if (refresh === true) {
             setRefresh(false);
           } else {
@@ -55,6 +63,7 @@ const Myreview = () => {
       .then((data) => {
         // console.log(data)
         if (data.deletedCount > 0) {
+          notify("Review Deleted.");
           if (refresh === true) {
             setRefresh(false);
           } else {
@@ -66,6 +75,8 @@ const Myreview = () => {
 
   return (
     <div>
+      <ToastContainer />
+
       {myreview.length === 0 ? (
         <h1 className="text-4xl italic font-bold mt-10 text-center text-white  underline my-20">
           No Reviews
@@ -75,6 +86,20 @@ const Myreview = () => {
           My Reviews
         </h1>
       )}
+      <div className="w-32 mx-auto ">
+        {Myreview ? (
+          <ClipLoader
+            color={"#ff0000"}
+            loading={spin}
+            // cssOverride={override}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          <p></p>
+        )}
+      </div>
       <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 mx-10">
         {myreview.map((review) => (
           <div className="card w-96 bg-base-100 shadow-xl image-full ">
@@ -150,29 +175,55 @@ const Myreview = () => {
                 </span>
                 <span>
                   {/* The button to open modal */}
-                  <a
+                  {/* <a
                     onClick={() => setId(review._id)}
                     href="#my-modal-2"
                     className="btn  ml-5 text-white font-semibold p-2 border cursor-pointer border-red-900"
                   >
                     Delete
-                  </a>
+                  </a> */}
 
-                  <div className="modal" id="my-modal-2">
+                  {/* <div className="modal" id="my-modal-2">
                     <div className="modal-box">
                       <h3 className="font-bold text-lg">Are you sure?</h3>
 
                       <div className="modal-action">
-                        <a
+                        <p
                           onClick={deleteReview}
-                          href="#"
                           className="btn px-3 text-white font-semibold p-2 border cursor-pointer border-red-900"
                         >
                           Yes
-                        </a>
+                        </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
+                  {/* The button to open modal */}
+
+                  <label
+                    htmlFor="my-modal-4"
+                    className="btn  border cursor-pointer border-red-900"
+                    onClick={() => setId(review._id)}
+                  >
+                    Delete
+                  </label>
+
+                  {/* Put this part before </body> tag */}
+                  <input
+                    type="checkbox"
+                    id="my-modal-4"
+                    className="modal-toggle"
+                  />
+                  <label htmlFor="my-modal-4" className="modal cursor-pointer">
+                    <label className="modal-box relative" htmlFor="">
+                      <h3 className="text-lg font-bold">Are you sure?</h3>
+                      <p
+                        onClick={deleteReview}
+                        className="btn px-3 fixed right-5 bottom-3 text-white font-semibold p-2 border cursor-pointer border-red-900"
+                      >
+                        Yes
+                      </p>
+                    </label>
+                  </label>
                 </span>
               </p>
             </div>

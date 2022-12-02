@@ -10,8 +10,12 @@ import {
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase/Firebase";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const AuthContext = createContext();
 const auth = getAuth(app);
+const notify = (data) => toast(data);
 
 const Context = ({ children }) => {
   const [user, setUser] = useState("working");
@@ -27,9 +31,11 @@ const Context = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-
+  console.log(loading);
   const signIn = (email, password) => {
     setLoading(true);
+    loading ? console.log("loading..") : console.log("end");
+    // console.log(loading);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -64,6 +70,7 @@ const Context = ({ children }) => {
     loading,
     hide,
     setHide,
+    notify,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
