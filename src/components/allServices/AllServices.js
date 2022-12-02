@@ -13,7 +13,7 @@ const AllServices = () => {
 
   useEffect(() => {
     setSpin(true);
-    fetch("http://localhost:5000/allservices")
+    fetch("https://travel-site-backend.vercel.app/allservices")
       .then((res) => res.json())
       .then((data) => {
         setAllservices(data);

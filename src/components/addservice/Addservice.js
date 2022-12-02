@@ -31,7 +31,7 @@ const Addservice = () => {
       img: url,
     };
     //console.log(add);
-    fetch("http://localhost:5000/addservice", {
+    fetch("https://travel-site-backend.vercel.app/addservice", {
       method: "POST",
       headers: {
         "content-type": "application/json",

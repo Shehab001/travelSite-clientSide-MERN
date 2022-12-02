@@ -26,7 +26,7 @@ const SingleService = () => {
 
   useEffect(() => {
     setSpin(false);
-    fetch(`http://localhost:5000/review/${service._id}`)
+    fetch(`https://travel-site-backend.vercel.app/review/${service._id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -50,7 +50,7 @@ const SingleService = () => {
     };
     // console.log(info);
 
-    fetch("http://localhost:5000/addreview", {
+    fetch("https://travel-site-backend.vercel.app/addreview", {
       method: "POST",
       headers: {
         "content-type": "application/json",

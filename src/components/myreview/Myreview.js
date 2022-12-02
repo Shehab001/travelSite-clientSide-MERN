@@ -16,7 +16,7 @@ const Myreview = () => {
   const xx = user?.email;
   // console.log(xx);
   useEffect(() => {
-    fetch(`http://localhost:5000/myreview/${xx}`)
+    fetch(`https://travel-site-backend.vercel.app/myreview/${xx}`)
       .then((res) => res.json())
       .then((data) => {
         setMyreview(data);
@@ -32,7 +32,7 @@ const Myreview = () => {
     const name = { review: `${form.review.value}` };
     //console.log(name);
 
-    fetch(`http://localhost:5000/updatereview/${id}`, {
+    fetch(`https://travel-site-backend.vercel.app/updatereview/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -56,7 +56,7 @@ const Myreview = () => {
   };
 
   const deleteReview = () => {
-    fetch(`http://localhost:5000/deletereview/${id}`, {
+    fetch(`https://travel-site-backend.vercel.app/deletereview/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

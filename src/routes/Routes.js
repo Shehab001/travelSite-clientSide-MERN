@@ -56,20 +56,13 @@ const router = createBrowserRouter([
         path: "/addservice",
         element: <Addservice></Addservice>,
       },
-
-      //   {
-      //     path: "/cart",
-      //     element: (
-      //       <PrivateRoute>
-      //         <Cart></Cart>
-      //       </PrivateRoute>
-      //     ),
-      //   },
       {
         path: "/singleservice/:id",
         element: <SingleService></SingleService>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/singleservice/${params.id}`),
+          fetch(
+            `https://travel-site-backend.vercel.app/singleservice/${params.id}`
+          ),
       },
       {
         path: "*",
