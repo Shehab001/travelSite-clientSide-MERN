@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Context";
 import "./Header.css";
 import { ToastContainer } from "react-toastify";
@@ -7,12 +7,14 @@ import { ToastContainer } from "react-toastify";
 const Header = () => {
   const { user, logOut, hide, setHide, notify } = useContext(AuthContext);
   //console.log(user?.photoURL);
+  let navigate = useNavigate();
 
   const handleBtn = () => {
     logOut()
       .then(() => {
         notify("Successfully Logged Out");
         setHide(true);
+        navigate("/");
       })
       .catch((error) => console.error(error));
   };

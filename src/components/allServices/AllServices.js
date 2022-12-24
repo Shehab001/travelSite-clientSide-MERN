@@ -26,8 +26,10 @@ const AllServices = () => {
         All Services
       </h1>
 
-      {spin === true ? (
-        <Loader></Loader>
+      {spin ? (
+        <div className="w-32 mx-auto">
+          <Loader></Loader>
+        </div>
       ) : (
         <div className="grid mx-auto grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
           {allservices.map((service) => (

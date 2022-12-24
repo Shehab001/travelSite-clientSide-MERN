@@ -5,12 +5,13 @@ import { ToastContainer } from "react-toastify";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import useDocumentTitle from "../useDocumentTitle";
+import Loader from "../Loader";
 
 const SingleService = () => {
   const [reviews, setReviews] = useState([]);
   const [fresh, setFresh] = useState(true);
   const [show, setShow] = useState(null);
-  const [spin, setSpin] = useState(false);
+  const [spinn, setSpinn] = useState(false);
   const location = useLocation();
   useDocumentTitle("Travo Service");
   console.log(location);
@@ -25,17 +26,17 @@ const SingleService = () => {
   //console.log(service.name);
 
   useEffect(() => {
-    setSpin(false);
+    setSpinn(true);
     fetch(`https://travel-site-backend.vercel.app/review/${service._id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
-        setSpin(true);
+        setSpinn(false);
       });
   }, [fresh]);
 
   const handleReview = (event) => {
-    setSpin(true);
+    setSpinn(true);
     event.preventDefault();
     const form = event.target;
     const review = form.review.value;
@@ -60,9 +61,9 @@ const SingleService = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          setSpin(false);
+          // setSpin(false);
           notify("Review Added");
-
+          setSpinn(false);
           event.target.reset();
           fresh ? setFresh(false) : setFresh(true);
         }
@@ -71,52 +72,64 @@ const SingleService = () => {
 
   return (
     <div>
+      {spinn && (
+        <div className="w-32 mx-auto">
+          <Loader></Loader>
+        </div>
+      )}
       <ToastContainer />
-      <div>
-        <h1 className="text-4xl italic font-bold mt-10 text-center text-white  underline my-20">
-          {service.name} Service
-        </h1>
+      {!spinn && (
+        <div>
+          <h1 className="text-4xl italic font-bold mt-10 text-center text-white  underline my-20">
+            {service.name} Service
+          </h1>
 
-        <div className="card w-96 bg-base-100 shadow-xl mx-auto">
-          <PhotoProvider>
-            <PhotoView src={service.img}>
-              <figure>
-                <img
-                  src={service.img}
-                  alt="Images"
-                  className="cursor-pointer"
-                />
-              </figure>
-            </PhotoView>
-          </PhotoProvider>
-          <div className="card-body">
-            <h2 className="card-title font-bold text-white">
-              {service.name}
-              <div className="badge badge-secondary">TOP</div>
-            </h2>
-            <p> {service.title}</p>
+          <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+            <PhotoProvider>
+              <PhotoView src={service.img}>
+                <figure>
+                  <img
+                    src={service.img}
+                    alt="Images"
+                    className="cursor-pointer"
+                  />
+                </figure>
+              </PhotoView>
+            </PhotoProvider>
+            <div className="card-body">
+              <h2 className="card-title font-bold text-white">
+                {service.name}
+                <div className="badge badge-secondary">TOP</div>
+              </h2>
+              <p> {service.title}</p>
 
-            <p className="text-white font-semibold text-left">
-              Rating : {service.rating}
-            </p>
-            <p className="text-white font-semibold  text-left">
-              Taken : {service.total_taken}
-            </p>
-            <p className="text-white font-semibold  text-left">
-              Cost : {service.price}
-            </p>
-            <div className="card-actions justify-end">
-              <div className="badge badge-outline cursor-pointer p-5">
-                View Details
+              <p className="text-white font-semibold text-left">
+                Rating : {service.rating}
+              </p>
+              <p className="text-white font-semibold  text-left">
+                Taken : {service.total_taken}
+              </p>
+              <p className="text-white font-semibold  text-left">
+                Cost : {service.price}
+              </p>
+              <div className="card-actions justify-end">
+                <div className="badge badge-outline cursor-pointer p-5">
+                  View Details
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       {/* //review */}
       <div>
         <h1 className="text-4xl italic font-bold mt-10 text-center text-white  underline my-20">
           {service.name} Review
+          {spinn && (
+            <div className="w-32 mx-auto my-20">
+              <Loader></Loader>
+            </div>
+          )}
         </h1>
         {reviews.length === 0 ? (
           <h1 className="text-4xl italic font-bold mt-10 text-center text-white  underline my-20">

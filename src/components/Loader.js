@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FadeLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 
 // const override: CSSProperties = {
 //   display: "block",
@@ -9,8 +9,14 @@ import { FadeLoader } from "react-spinners";
 // };
 const Loader = () => {
   return (
-    <div className="w-full">
-      <FadeLoader className="w-full mx-auto my-20" color="#36d7b7" />
+    <div>
+      <ClipLoader
+        color={"#ff0000"}
+        // cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
     </div>
   );
 };
